@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CollectTracker Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#frontend">Frontend</a></li>
+                <li><a href="#backend">Backend</a></li>
+                <li><a href="#main-process">Main Process</a></li>
+                <li><a href="#screenshots">Application Screenshots</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <div class="content">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h1>CollectTracker</h1>
+            <p class="description">A desktop application for managing collections built with React, Express, and Electron. Below is a breakdown of each of the project files as well as links to show corresponding code</p>
+            <div class="tech-stack">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Express</span>
+                <span class="tech-tag">Electron</span>
+                <span class="tech-tag">SQLite</span>
+            </div>
+        </section>
+
+<!-- Frontend Section -->
+<section id="frontend">
+    <h2>Frontend - Client Folder</h2>
+    <div class="tech-stack">
+        <span class="tech-tag">React</span>
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JavaScript</span>
+    </div>
+    <div class="tab-container">
+        <div class="tab-list">
+            <button class="tab-button active" onclick="openTab('components')">Components</button>
+            <button class="tab-button" onclick="openTab('app')">App.js</button>
+            <button class="tab-button" onclick="openTab('config')">config.js</button>
+            <button class="tab-button" onclick="openTab('index')">index.js</button>
+            <button class="tab-button" onclick="openTab('package')">package.json</button>
+        </div>
+
+            
+            
+
+<!-- Components Tab -->
+<div id="components" class="tab-content active">
+    <div class="component-list">
+        <button class="component-button" onclick="showComponent('AddCollectionForm')">AddCollectionForm</button>
+        <button class="component-button" onclick="showComponent('AddItemForm')">AddItemForm</button>
+        <button class="component-button" onclick="showComponent('CategoryItem')">CategoryItem</button>
+        <button class="component-button" onclick="showComponent('CategoryModal')">CategoryModal</button>
+        <button class="component-button" onclick="showComponent('CollectionList')">CollectionList</button>
+        <button class="component-button" onclick="showComponent('CollectionPage')">CollectionPage</button>
+        <button class="component-button" onclick="showComponent('CollectionValue')">CollectionValue</button>
+        <button class="component-button" onclick="showComponent('EditItemModal')">EditItemModal</button>
+        <button class="component-button" onclick="showComponent('ItemCard')">ItemCard</button>
+        <button class="component-button" onclick="showComponent('MainLayout')">MainLayout</button>
+        <button class="component-button" onclick="showComponent('PhotoGalleryModal')">PhotoGalleryModal</button>
+        <button class="component-button" onclick="showComponent('SearchSortControls')">SearchSortControls</button>
+        <button class="component-button" onclick="showComponent('Sidebar')">Sidebar</button>
+    </div>
+  
+    
+    <!-- AddCollectionForm Documentation -->
+    <div class="component-content" id="AddCollectionForm">
+        <h3>AddCollectionForm</h3>
+        <div class="component-section">
+            <h4>Description</h4>
+            <p>Modal form component that handles the creation of new collections through a modal interface. Provides a form with collection name input and type selection (Generic, Books, Records, or Custom).</p>
+        </div>
+        <div class="component-section">
+            <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/AddCollectionForm"
+               class="github-link" target="_blank">
+               View Code on GitHub
+            </a>
+        </div>
+        <div class="component-section">
+            <h4>Key Functions</h4>
+            <ul>
+                <li><strong>handleSubmit()</strong> - Processes form submission and creates new collection via API call</li>
+                <li><strong>State Management:</strong>
+                    <ul>
+                        <li>isModalOpen - Controls modal visibility</li>
+                        <li>formData - Manages form inputs (name, type, customType)</li>
+                    </ul>
+                </li>
+                <li><strong>Collection Types:</strong> Generic, Books, Records, Custom</li>
+            </ul>
+        </div>
+        <div class="component-section">
+            <h4>Props</h4>
+            <ul>
+                <li><strong>onCollectionAdded</strong> - Callback function triggered when a new collection is successfully created</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- AddItemForm Documentation-->
+    <div class="component-content" id="AddItemForm">
+        <h3>AddItemForm</h3>
+        <div class="component-section">
+            <h4>Description</h4>
+            <p>Modal form component that handles the creation of new items within a collection. Provides dynamic form fields based on collection type (books, records, or generic) with support for custom fields.</p>
+        </div>
+        <div class="component-section">
+            <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/AddItemForm"
+               class="github-link" target="_blank">
+               View Code on GitHub
+            </a>
+        </div>
+        <div class="component-section">
+            <h4>Key Functions</h4>
+            <ul>
+                <li><strong>handleSubmit()</strong> - Processes form submission and creates new item via API call</li>
+                <li><strong>getFieldsByType()</strong> - Returns appropriate fields based on collection type</li>
+                <li><strong>addCustomField()</strong> - Allows users to add custom fields to their form</li>
+            </ul>
+        </div>
+        <div class="component-section">
+            <h4>Collection Types & Fields</h4>
+            <ul>
+                <li><strong>Books:</strong> Title, Published, Edition, Publisher, Obtained From, Unique Features, Personal Note, Translation Details</li>
+                <li><strong>Records:</strong> Title, Condition, Value, Label, Matrix #, Variation, Country, Pressing, Notes</li>
+                <li><strong>Generic:</strong> Title, Description</li>
+                <li><strong>Custom:</strong> Basic fields plus user-defined custom fields</li>
+            </ul>
+        </div>
+        <div class="component-section">
+            <h4>Props</h4>
+            <ul>
+                <li><strong>collectionType</strong> - Determines which form fields to display</li>
+                <li><strong>onItemAdded</strong> - Callback function triggered when a new item is successfully created</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CategoryItem Documentaion-->
+    <div class="component-content" id="CategoryItem">
+        <h3>CategoryItem</h3>
+        
+        <div class="component-section">
+            <h4>Description</h4>
+            <p>Interactive component that manages individual category display, editing, and deletion. Features context menu for actions and inline editing capabilities.</p>
+        </div>
+    
+        <div class="component-section">
+            <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/CategoryItem"
+               class="github-link" target="_blank">
+               View Code on GitHub
+            </a>
+        </div>
+    
+        <div class="component-section">
+            <h4>Key Functions</h4>
+            <ul>
+                <li><strong>handleEdit()</strong> - Activates inline editing mode for category name</li>
+                <li><strong>handleSave()</strong> - Processes and saves edited category name</li>
+                <li><strong>handleDelete()</strong> - Initiates deletion process with confirmation</li>
+                <li><strong>confirmDelete()</strong> - Executes category deletion after confirmation</li>
+            </ul>
+        </div>
+    
+        <div class="component-section">
+            <h4>State Management</h4>
+            <ul>
+                <li><strong>showMenu</strong> - Controls context menu visibility</li>
+                <li><strong>showDeleteConfirm</strong> - Controls delete confirmation dialog</li>
+                <li><strong>isEditing</strong> - Controls edit mode state</li>
+                <li><strong>editedName</strong> - Stores temporary category name during editing</li>
+            </ul>
+        </div>
+    
+        <div class="component-section">
+            <h4>Props</h4>
+            <ul>
+                <li><strong>category</strong> - Object containing category data (id, name)</li>
+                <li><strong>onEdit</strong> - Callback for category name updates</li>
+                <li><strong>onDelete</strong> - Callback for category deletion</li>
+                <li><strong>isSelected</strong> - Boolean for selected state</li>
+                <li><strong>onSelect</strong> - Callback when category is selected</li>
+            </ul>
+        </div>
+    </div>
+    
+<!-- CategoryModal Documentation -->
+<div class="component-content" id="CategoryModal">
+    <h3>CategoryModal</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Modal component that manages category assignments for collection items. Provides a checkbox interface for selecting multiple categories and handles the saving of these assignments.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/CategoryModal"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Key Functions</h4>
+        <ul>
+            <li><strong>toggleCategory()</strong> - Handles individual category selection/deselection</li>
+            <li><strong>handleSave()</strong> - Processes and saves selected categories</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>State Management</h4>
+        <ul>
+            <li><strong>selectedCategories</strong> - Set containing IDs of selected categories</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Props</h4>
+        <ul>
+            <li><strong>item</strong> - The collection item being categorized</li>
+            <li><strong>categories</strong> - Array of available categories</li>
+            <li><strong>onClose</strong> - Callback to close the modal</li>
+            <li><strong>onSave</strong> - Callback to save category assignments</li>
+            <li><strong>currentCategories</strong> - Array of categories currently assigned to the item</li>
+        </ul>
+    </div>
+</div>
+
+<!-- CollectionList Documentation -->
+<div class="component-content" id="CollectionList">
+    <h3>CollectionList</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Core component that manages the display and operations for all user collections. Features a responsive grid layout with collection cards, search functionality, sorting options, and modal interfaces for collection management.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/CollectionList"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Key Functions</h4>
+        <ul>
+            <li><strong>fetchCollections()</strong> - Retrieves collections from API</li>
+            <li><strong>getSortedCollections()</strong> - Handles collection sorting logic</li>
+            <li><strong>handleAddCollection()</strong> - Processes new collection creation</li>
+            <li><strong>handleSaveEdit()</strong> - Manages collection updates</li>
+            <li><strong>handleDelete()</strong> - Processes collection deletion</li>
+            <li><strong>handleCollectionClick()</strong> - Handles navigation to collection details</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>State Management</h4>
+        <ul>
+            <li><strong>collections</strong> - Array of all user collections</li>
+            <li><strong>filteredCollections</strong> - Filtered/sorted collection array</li>
+            <li><strong>searchTerm</strong> - Current search filter</li>
+            <li><strong>sortOption</strong> - Current sort preference</li>
+            <li><strong>showDeleteModal</strong> - Delete confirmation visibility</li>
+            <li><strong>showAddModal</strong> - Add collection form visibility</li>
+            <li><strong>editingCollection</strong> - Currently edited collection</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Features</h4>
+        <ul>
+            <li><strong>Search:</strong> Filter collections by name or type</li>
+            <li><strong>Sort Options:</strong> 
+                <ul>
+                    <li>Name (A-Z/Z-A)</li>
+                    <li>Creation Date (Newest/Oldest)</li>
+                    <li>Item Count (Most/Least)</li>
+                </ul>
+            </li>
+            <li><strong>Collection Types:</strong> Generic, Books, Records, Custom</li>
+            <li><strong>Modal Interfaces:</strong> Add, Edit, Delete confirmations</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- CollectionPage Documentation -->
+<div class="component-content" id="CollectionPage">
+    <h3>CollectionPage</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Core interface component for managing individual collections. Provides comprehensive functionality for item management, category organization, searching, sorting, and collection metadata handling.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/CollectionPage"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Key Functions</h4>
+        <ul>
+            <li><strong>refreshItemsAndCategories()</strong> - Synchronizes items and categories data with server</li>
+            <li><strong>handleDescriptionChange()</strong> - Updates collection description</li>
+            <li><strong>handleAddCategory()</strong> - Creates new categories</li>
+            <li><strong>handleUpdateCategories()</strong> - Manages item categorization</li>
+            <li><strong>handleItemAdded()</strong> - Processes new item creation</li>
+            <li><strong>handleItemDelete()</strong> - Manages item deletion</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>State Management</h4>
+        <ul>
+            <li><strong>collection</strong> - Current collection data</li>
+            <li><strong>items</strong> - Array of collection items</li>
+            <li><strong>categories</strong> - Collection categories</li>
+            <li><strong>selectedCategory</strong> - Active category filter</li>
+            <li><strong>searchTerm</strong> - Current search filter</li>
+            <li><strong>sortOption</strong> - Active sort preference</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Features</h4>
+        <ul>
+            <li><strong>Item Management:</strong> Add, edit, delete items</li>
+            <li><strong>Category System:</strong> Create, edit, delete categories and assign to items</li>
+            <li><strong>Search & Sort:</strong> Filter items by title and multiple sort options</li>
+            <li><strong>Collection Value:</strong> Automatic value calculation for record collections</li>
+            <li><strong>Description Editor:</strong> Manage collection descriptions</li>
+            <li><strong>Responsive Layout:</strong> Sidebar and main content organization</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li><strong>Components:</strong> AddItemForm, ItemCard, Sidebar, SearchSortControls, CollectionValue</li>
+            <li><strong>Router:</strong> useParams, useNavigate from react-router-dom</li>
+            <li><strong>API:</strong> Requires backend endpoints for CRUD operations</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- CollectionValue Documentaion -->
+<div class="component-content" id="CollectionValue">
+    <h3>CollectionValue</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Specialized component that calculates and displays the total monetary value of a collection by aggregating individual item values. Features robust JSON parsing and formatted currency display.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/CollectionValue"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Key Functions</h4>
+        <ul>
+            <li><strong>Value Calculation:</strong> Reduces array of items to sum total value</li>
+            <li><strong>Data Parsing:</strong> Safely handles JSON parsing of item data</li>
+            <li><strong>Currency Formatting:</strong> Displays values with proper decimal places</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Props</h4>
+        <ul>
+            <li><strong>items</strong> - Array of collection items containing value data in their data property</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Features</h4>
+        <ul>
+            <li><strong>Error Handling:</strong> Graceful handling of JSON parsing errors</li>
+            <li><strong>Default Values:</strong> Defaults to 0 for items without value data</li>
+            <li><strong>Locale Support:</strong> Uses US locale for currency formatting</li>
+        </ul>
+    </div>
+</div>
+
+<!-- EditItemModal Documentation -->
+<div class="component-content" id="EditItemModal">
+    <h3>EditItemModal</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Advanced modal component that provides type-specific forms for editing collection items. Features dynamic field generation, file upload handling, and complex data structure management.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/EditItemModal"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Key Functions</h4>
+        <ul>
+            <li><strong>getFieldsByType()</strong> - Returns appropriate fields based on collection type</li>
+            <li><strong>handleSubmit()</strong> - Processes form submission with multipart data</li>
+            <li><strong>Data Parsing</strong> - Handles nested JSON structures and image uploads</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Field Configurations</h4>
+        <ul>
+            <li><strong>Books:</strong> Title, Published, Edition, Publisher, Unique Features, Translation Details</li>
+            <li><strong>Records:</strong> Title, Condition, Value, Label, Matrix #, Variation, Country, Pressing</li>
+            <li><strong>Generic:</strong> Title, Description</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Props</h4>
+        <ul>
+            <li><strong>item</strong> - Current item being edited</li>
+            <li><strong>type</strong> - Collection type (books, records, generic)</li>
+            <li><strong>onClose</strong> - Modal close callback</li>
+            <li><strong>onSave</strong> - Successful save callback</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Features</h4>
+        <ul>
+            <li><strong>Dynamic Forms:</strong> Type-specific field generation</li>
+            <li><strong>File Handling:</strong> Cover image upload support</li>
+            <li><strong>Data Validation:</strong> Required field enforcement</li>
+            <li><strong>Error Handling:</strong> Robust JSON parsing and API error management</li>
+        </ul>
+    </div>
+</div>
+
+<!--ItemCard Documentation -->
+<div class="component-content" id="ItemCard">
+    <h3>ItemCard</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Comprehensive component for displaying and managing individual collection items. Features rich interaction options including image display, category management, detailed information viewing, and photo gallery functionality.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/ItemCard"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Key Features</h4>
+        <ul>
+            <li><strong>Item Display:</strong> Image preview with type-specific placeholders</li>
+            <li><strong>Interactive Menus:</strong> Context menu for edit/delete operations</li>
+            <li><strong>Modal Interfaces:</strong>
+                <ul>
+                    <li>Detailed item information</li>
+                    <li>Category management</li>
+                    <li>Photo gallery</li>
+                    <li>Edit form</li>
+                    <li>Delete confirmation</li>
+                </ul>
+            </li>
+            <li><strong>Dynamic Fields:</strong> Type-specific field configurations for books and records</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Props</h4>
+        <ul>
+            <li><strong>item</strong> - Item data object</li>
+            <li><strong>type</strong> - Collection type (books, records, etc.)</li>
+            <li><strong>categories</strong> - Available categories</li>
+            <li><strong>onUpdateCategories</strong> - Category update handler</li>
+            <li><strong>onDelete</strong> - Item deletion handler</li>
+            <li><strong>onRefresh</strong> - Data refresh handler</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>State Management</h4>
+        <ul>
+            <li><strong>showDetails</strong> - Controls detailed view modal</li>
+            <li><strong>showCategoryModal</strong> - Controls category management modal</li>
+            <li><strong>showMenu</strong> - Controls context menu visibility</li>
+            <li><strong>showDeleteConfirm</strong> - Controls delete confirmation dialog</li>
+            <li><strong>showEditModal</strong> - Controls edit form modal</li>
+            <li><strong>showGalleryModal</strong> - Controls photo gallery modal</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li>CategoryModal</li>
+            <li>EditItemModal</li>
+            <li>PhotoGalleryModal</li>
+            <li>API_BASE_URL configuration</li>
+        </ul>
+    </div>
+</div>
+
+<!-- MainLayout Documentation -->
+<div class="component-content" id="MainLayout">
+    <h3>MainLayout</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Core structural component that serves as the primary wrapper for the application. Provides the main container and layout management for the CollectionList component.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/MainLayout"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Structure</h4>
+        <ul>
+            <li><strong>main-layout:</strong> Root container class</li>
+            <li><strong>content:</strong> Inner content wrapper</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li><strong>CollectionList:</strong> Primary content component</li>
+            <li><strong>MainLayout.css:</strong> Styling definitions</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Features</h4>
+        <ul>
+            <li>Centralized layout management</li>
+            <li>Consistent styling container</li>
+            <li>Responsive design structure</li>
+        </ul>
+    </div>
+</div>
+
+<!-- PhotoGalleryModal Documentation -->
+<div class="component-content" id="PhotoGalleryModal">
+    <h3>PhotoGalleryModal</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Advanced modal component that provides a comprehensive photo gallery interface for collection items. Features carousel navigation, multi-photo upload capabilities, and photo management tools.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/PhotoGalleryModal"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Key Functions</h4>
+        <ul>
+            <li><strong>fetchPhotos()</strong> - Retrieves photo list from API</li>
+            <li><strong>handleFileUpload()</strong> - Manages multiple photo uploads</li>
+            <li><strong>handleDeletePhoto()</strong> - Processes photo deletion</li>
+            <li><strong>nextPhoto/previousPhoto()</strong> - Handles carousel navigation</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>State Management</h4>
+        <ul>
+            <li><strong>photos</strong> - Array of item photos</li>
+            <li><strong>currentPhotoIndex</strong> - Active photo position</li>
+            <li><strong>isUploading</strong> - Upload status indicator</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Props</h4>
+        <ul>
+            <li><strong>item</strong> - Current item being viewed</li>
+            <li><strong>onClose</strong> - Modal close handler</li>
+            <li><strong>onRefresh</strong> - Data refresh handler</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Features</h4>
+        <ul>
+            <li><strong>Photo Display:</strong>
+                <ul>
+                    <li>Carousel navigation</li>
+                    <li>Photo counter</li>
+                    <li>Error handling for image loading</li>
+                </ul>
+            </li>
+            <li><strong>Upload Capabilities:</strong>
+                <ul>
+                    <li>Multiple file selection</li>
+                    <li>Progress indication</li>
+                    <li>Sequential upload handling</li>
+                </ul>
+            </li>
+            <li><strong>Photo Management:</strong>
+                <ul>
+                    <li>Individual photo deletion</li>
+                    <li>Automatic index adjustment</li>
+                    <li>Gallery state persistence</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- SearchSortControls Documentation -->
+<div class="component-content" id="SearchSortControls">
+    <h3>SearchSortControls</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Flexible control component that combines search and sort functionality in a clean interface. Provides real-time filtering and sorting capabilities with customizable options.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/SearchSortControls"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Props</h4>
+        <ul>
+            <li><strong>searchTerm</strong> - Current search value</li>
+            <li><strong>onSearchChange</strong> - Search input handler</li>
+            <li><strong>sortOption</strong> - Current sort selection</li>
+            <li><strong>onSortChange</strong> - Sort selection handler</li>
+            <li><strong>sortOptions</strong> - Array of available sort options</li>
+            <li><strong>searchPlaceholder</strong> - Custom placeholder text</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Features</h4>
+        <ul>
+            <li><strong>Search Input:</strong>
+                <ul>
+                    <li>Real-time filtering</li>
+                    <li>Customizable placeholder</li>
+                    <li>Controlled input handling</li>
+                </ul>
+            </li>
+            <li><strong>Sort Dropdown:</strong>
+                <ul>
+                    <li>Dynamic option rendering</li>
+                    <li>Controlled selection state</li>
+                    <li>Flexible option configuration</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Structure</h4>
+        <ul>
+            <li><strong>search-and-sort:</strong> Main container</li>
+            <li><strong>search-container:</strong> Search input wrapper</li>
+            <li><strong>sort-container:</strong> Sort dropdown wrapper</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Sidebar Documentation -->
+<div class="component-content" id="Sidebar">
+    <h3>Sidebar</h3>
+    
+    <div class="component-section">
+        <h4>Description</h4>
+        <p>Comprehensive sidebar component that manages collection categories and descriptions. Provides intuitive interfaces for category management and collection description editing.</p>
+    </div>
+
+    <div class="component-section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/components/Sidebar"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="component-section">
+        <h4>Props</h4>
+        <ul>
+            <li><strong>categories</strong> - Array of available categories</li>
+            <li><strong>selectedCategory</strong> - Currently selected category ID</li>
+            <li><strong>setSelectedCategory</strong> - Category selection handler</li>
+            <li><strong>onAddCategory</strong> - New category creation handler</li>
+            <li><strong>onEditCategory</strong> - Category edit handler</li>
+            <li><strong>onDeleteCategory</strong> - Category deletion handler</li>
+            <li><strong>showAddCategory</strong> - Controls add category form visibility</li>
+            <li><strong>setShowAddCategory</strong> - Toggle add category form</li>
+            <li><strong>newCategoryName</strong> - New category input value</li>
+            <li><strong>setNewCategoryName</strong> - New category name update handler</li>
+            <li><strong>description</strong> - Collection description text</li>
+            <li><strong>onDescriptionChange</strong> - Description update handler</li>
+            <li><strong>collectionName</strong> - Name of current collection</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Features</h4>
+        <ul>
+            <li><strong>Category Management:</strong>
+                <ul>
+                    <li>Add new categories</li>
+                    <li>Edit existing categories</li>
+                    <li>Delete categories</li>
+                    <li>Category selection</li>
+                </ul>
+            </li>
+            <li><strong>Description Editor:</strong>
+                <ul>
+                    <li>Multi-line text input</li>
+                    <li>Real-time updates</li>
+                    <li>Placeholder support</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Structure</h4>
+        <ul>
+            <li><strong>sidebar-container:</strong> Main wrapper</li>
+            <li><strong>categories-header:</strong> Category section header</li>
+            <li><strong>categories-list:</strong> Category items container</li>
+            <li><strong>description-section:</strong> Description editor area</li>
+        </ul>
+    </div>
+
+    <div class="component-section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li>CategoryItem component</li>
+            <li>Sidebar.css styles</li>
+        </ul>
+    </div>
+</div>
+
+<!--Future components go here -->
+</div>
+
+
+
+
+
+<!-- Other frontend tabs -->
+<!-- App.js -->
+<div id="app" class="tab-content">
+    <h3>App.js</h3>    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Root component of the CollectTracker application that establishes the primary routing and application structure.</p>
+    </div>
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/App.js"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+    <div class="section">
+        <h4>Key Features</h4>
+        <ul>
+            <li><strong>Routing System:</strong> Implements React Router for navigation</li>
+            <li><strong>Application Structure:</strong> Defines main layout and header</li>
+            <li><strong>Route Management:</strong> Handles primary route definitions</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h4>Routes</h4>
+        <ul>
+            <li><strong>"/"</strong> - Main collection list view (MainLayout)</li>
+            <li><strong>"/collection/:id"</strong> - Individual collection view (CollectionPage)</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li>react-router-dom</li>
+            <li>MainLayout component</li>
+            <li>CollectionPage component</li>
+            <li>App.css styles</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- config.js Documentation -->
+<div id="config" class="tab-content">
+        <h3>config.js</h3>
+        
+        <div class="section">
+            <h4>Description</h4>
+            <p>Configuration management file that handles environment-specific settings and API endpoint configuration for the CollectTracker application.</p>
+        </div>
+    
+        <div class="section">
+            <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/config.js"
+               class="github-link" target="_blank">
+               View Code on GitHub
+            </a>
+        </div>
+    
+        <div class="section">
+            <h4>Key Features</h4>
+            <ul>
+                <li><strong>Environment Detection:</strong> Automatically determines development or production environment</li>
+                <li><strong>Dynamic API URL:</strong> Sets appropriate API base URL based on environment</li>
+                <li><strong>Centralized Configuration:</strong> Single source for API endpoint management</li>
+            </ul>
+        </div>
+    
+        <div class="section">
+            <h4>Configuration Values</h4>
+            <ul>
+                <li><strong>Development URL:</strong> http://localhost:5000/api</li>
+                <li><strong>Production URL:</strong> /api</li>
+            </ul>
+        </div>
+    
+        <div class="section">
+            <h4>Usage</h4>
+            <ul>
+                <li>Import and use API_BASE_URL for all API requests</li>
+                <li>Automatically adapts to current environment</li>
+                <li>Simplifies deployment configuration</li>
+            </ul>
+        </div>
+</div>
+    
+
+
+<!-- client index.js Documentation -->
+<div id="index" class="tab-content">
+    <h3>index.js</h3>
+    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Entry point of the CollectTracker React application that handles core initialization, rendering, and performance monitoring setup.</p>
+    </div>
+
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/src/index.js"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="section">
+        <h4>Key Features</h4>
+        <ul>
+            <li><strong>React Initialization:</strong> Sets up the root React element</li>
+            <li><strong>Strict Mode:</strong> Enables additional development checks</li>
+            <li><strong>Performance Monitoring:</strong> Configures web vitals reporting</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Core Functions</h4>
+        <ul>
+            <li><strong>ReactDOM.createRoot():</strong> Creates the main application root</li>
+            <li><strong>root.render():</strong> Renders the App component</li>
+            <li><strong>reportWebVitals():</strong> Initializes performance tracking</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li>react</li>
+            <li>react-dom</li>
+            <li>App component</li>
+            <li>index.css styles</li>
+            <li>reportWebVitals utility</li>
+        </ul>
+    </div>
+</div>
+
+
+
+<!-- package.son Documentation -->
+<div id="package" class="tab-content">
+    <h3>package.json (client)</h3>
+    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Configuration file that manages dependencies, scripts, and project settings for the CollectTracker client application.</p>
+    </div>
+
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/client/package.json"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="section">
+        <h4>Core Dependencies</h4>
+        <ul>
+            <li><strong>React:</strong> v18.2.0 - Frontend framework</li>
+            <li><strong>React Router:</strong> v6.22.0 - Navigation management</li>
+            <li><strong>React Scripts:</strong> v5.0.1 - Build tools and configuration</li>
+            <li><strong>Testing Libraries:</strong> Jest and React Testing Library</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Development Tools</h4>
+        <ul>
+            <li><strong>Storybook:</strong> Component development environment</li>
+            <li><strong>ESLint:</strong> Code quality and style checking</li>
+            <li><strong>Webpack:</strong> Module bundling</li>
+            <li><strong>PropTypes:</strong> Runtime type checking</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Available Scripts</h4>
+        <ul>
+            <li><strong>npm start:</strong> Runs development server</li>
+            <li><strong>npm build:</strong> Creates production build</li>
+            <li><strong>npm test:</strong> Runs test suite</li>
+            <li><strong>npm run storybook:</strong> Launches Storybook on port 6006</li>
+        </ul>
+    </div>
+</div>
+
+
+</section>
+<!-- End of the Frontend Section-->
+
+
+
+
+
+
+
+<!-- Backend Section -->
+<section id="backend">
+    <h2>Backend - Server Folder</h2>
+    <div class="tech-stack">
+        <span class="tech-tag">Node.js</span>
+        <span class="tech-tag">SQLite</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Express</span>
+    </div>
+    <div class="tab-container">
+        <div class="tab-list">
+            <button class="tab-button active" onclick="openTab('collections')">collections.js</button>
+            <button class="tab-button" onclick="openTab('categories')">categories.js</button>
+            <button class="tab-button" onclick="openTab('backend-index')">index.js</button>
+            <button class="tab-button" onclick="openTab('backend-package')">package.json</button>
+            <button class="tab-button" onclick="openTab('db-config')">db.config.js</button>
+        </div>
+        <!-- Backend tab contents will go here -->
+
+
+
+<!--collections.js Documentation -->
+<div id="collections" class="tab-content">
+    <h3>collections.js</h3>
+    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Core router handling all collection and item-related operations including CRUD operations, image management, and category associations.</p>
+    </div>
+
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/server/routes/collections.js"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="section">
+        <h4>Collection Endpoints</h4>
+        <ul>
+            <li><strong>POST /</strong> - Create new collection</li>
+            <li><strong>GET /</strong> - Retrieve all collections with item counts</li>
+            <li><strong>PUT /:id</strong> - Update collection details</li>
+            <li><strong>DELETE /:id</strong> - Delete collection and its items</li>
+            <li><strong>GET /:id</strong> - Get single collection by ID</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Item Management</h4>
+        <ul>
+            <li><strong>POST /:collectionId/items</strong> - Add new item with image support</li>
+            <li><strong>GET /:collectionId/items</strong> - Get all items in collection</li>
+            <li><strong>PUT /:collectionId/items/:itemId</strong> - Update item details</li>
+            <li><strong>DELETE /:collectionId/items/:itemId</strong> - Remove item from collection</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Image Handling</h4>
+        <ul>
+            <li><strong>GET /items/:itemId/image</strong> - Retrieve item's cover image</li>
+            <li><strong>GET /items/:itemId/photos</strong> - Get all item photos</li>
+            <li><strong>POST /:collectionId/items/:itemId/photos</strong> - Upload new photo</li>
+            <li><strong>DELETE /items/:itemId/photos/:photoId</strong> - Remove photo</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li>express - Web framework</li>
+            <li>multer - Image upload handling</li>
+            <li>db.config - Database configuration</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- categories.js Documentation -->
+<div id="categories" class="tab-content">
+    <h3>categories.js</h3>
+    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Router handling all category-related operations, including category management and item-category associations.</p>
+    </div>
+
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/server/routes/categories.js"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="section">
+        <h4>Category Management</h4>
+        <ul>
+            <li><strong>GET /collections/:id/categories</strong> - List all categories in a collection</li>
+            <li><strong>POST /collections/:id/categories</strong> - Create new category</li>
+            <li><strong>PUT /collections/:collectionId/categories/:categoryId</strong> - Update category</li>
+            <li><strong>DELETE /collections/:collectionId/categories/:categoryId</strong> - Remove category</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Item-Category Operations</h4>
+        <ul>
+            <li><strong>POST /items/:itemId/categories/:categoryId</strong> - Assign category to item</li>
+            <li><strong>DELETE /items/:itemId/categories/:categoryId</strong> - Remove category from item</li>
+            <li><strong>GET /items/:itemId/categories</strong> - List item's categories</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Key Features</h4>
+        <ul>
+            <li><strong>Category Management:</strong> Full CRUD operations for categories</li>
+            <li><strong>Association Handling:</strong> Manages item-category relationships</li>
+            <li><strong>Data Validation:</strong> Checks for existing relationships and valid IDs</li>
+            <li><strong>Cascade Deletion:</strong> Removes associated records when deleting categories</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li>express - Web framework</li>
+            <li>db.config - Database configuration</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- server index.js Documentation -->
+<div id="backend-index" class="tab-content">
+    <h3>index.js (server)</h3>
+    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Main server entry point that configures Express application, middleware, routes, and database connections.</p>
+    </div>
+
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/server/index.js"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="section">
+        <h4>Server Configuration</h4>
+        <ul>
+            <li><strong>Port:</strong> Uses PORT environment variable or defaults to 5000</li>
+            <li><strong>CORS:</strong> Enabled for cross-origin requests</li>
+            <li><strong>Body Parser:</strong> Handles JSON and URL-encoded data up to 50MB</li>
+            <li><strong>File Upload:</strong> Configured with multer for memory storage</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>API Routes</h4>
+        <ul>
+            <li><strong>/api/collections/*</strong> - Collection management endpoints</li>
+            <li><strong>/api/*</strong> - Category management endpoints</li>
+            <li><strong>/test</strong> - Server health check endpoint</li>
+            <li><strong>/db-test</strong> - Database connection test endpoint</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li>express - Web application framework</li>
+            <li>cors - Cross-origin resource sharing</li>
+            <li>dotenv - Environment variable management</li>
+            <li>multer - File upload handling</li>
+            <li>db.config - Database configuration</li>
+        </ul>
+    </div>
+</div>
+
+<!-- server package.json Documentation -->
+<div id="backend-package" class="tab-content">
+    <h3>package.json (Server)</h3>
+    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Node.js package configuration file managing server dependencies, scripts, and project metadata.</p>
+    </div>
+
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/server/package.json"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="section">
+        <h4>Core Dependencies</h4>
+        <ul>
+            <li><strong>express (^4.21.2):</strong> Web application framework</li>
+            <li><strong>sqlite3 (^5.1.7):</strong> SQLite database driver</li>
+            <li><strong>electron (^35.1.2):</strong> Desktop application framework</li>
+            <li><strong>electron-builder (^26.0.12):</strong> Application packaging</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Middleware Dependencies</h4>
+        <ul>
+            <li><strong>cors (^2.8.5):</strong> Cross-origin resource sharing</li>
+            <li><strong>multer (^1.4.5-lts.2):</strong> File upload handling</li>
+            <li><strong>dotenv (^16.4.7):</strong> Environment configuration</li>
+            <li><strong>mysql2 (^3.14.0):</strong> MySQL database support</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Scripts</h4>
+        <ul>
+            <li><strong>start:</strong> node index.js</li>
+            <li><strong>test:</strong> Test script placeholder</li>
+        </ul>
+    </div>
+</div>
+
+<!-- db.config.js Documentation -->
+
+<div id="db-config" class="tab-content">
+    <h3>db.config.js</h3>
+    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Database configuration and initialization module that sets up SQLite database, creates tables, and provides promise-based database operations.</p>
+    </div>
+
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/server/db.config.js"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="section">
+        <h4>Database Schema</h4>
+        <ul>
+            <li><strong>collections:</strong> Stores collection metadata and details</li>
+            <li><strong>items:</strong> Manages individual items within collections</li>
+            <li><strong>categories:</strong> Handles categorization system</li>
+            <li><strong>item_categories:</strong> Maps items to categories</li>
+            <li><strong>images:</strong> Stores item cover images</li>
+            <li><strong>item_photos:</strong> Manages additional item photos</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Key Features</h4>
+        <ul>
+            <li><strong>Path Management:</strong> Dynamic database location based on environment</li>
+            <li><strong>Auto-initialization:</strong> Creates tables if they don't exist</li>
+            <li><strong>Promise Support:</strong> Async wrapper for SQLite operations</li>
+            <li><strong>Error Handling:</strong> Robust database operation error management</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Exported Methods</h4>
+        <ul>
+            <li><strong>all():</strong> Retrieve multiple rows</li>
+            <li><strong>run():</strong> Execute SQL commands</li>
+            <li><strong>get():</strong> Fetch single row</li>
+        </ul>
+    </div>
+</div>
+
+
+
+<!-- Future backend files here -->
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- Main Process Section -->
+<section id="main-process">
+    <h2>Main Process</h2>
+    <div class="tech-stack">
+        <span class="tech-tag">Electron</span>
+        <span class="tech-tag">Node.js</span>
+        <span class="tech-tag">JavaScript</span>
+    </div>
+    <div class="tab-container">
+        <div class="tab-list">
+            <button class="tab-button active" onclick="openTab('main-js')">main.js</button>
+            <button class="tab-button" onclick="openTab('main-package')">package.json</button>
+        </div>
+
+
+        <!-- main.js Documentation -->
+        <div id="main-js" class="tab-content">
+            <h3>main.js</h3>
+            
+            <div class="section">
+                <h4>Description</h4>
+                <p>Core Electron main process file that integrates the Express server with the desktop application, manages file system operations, and handles inter-process communication.</p>
+            </div>
+        
+            <div class="section">
+                <a href="https://github.com/YourUsername/CollectTracker/blob/main/main.js"
+                   class="github-link" target="_blank">
+                   View Code on GitHub
+                </a>
+            </div>
+        
+            <div class="section">
+                <h4>Key Features</h4>
+                <ul>
+                    <li><strong>Environment Detection:</strong> Dynamically configures paths based on development or production environment</li>
+                    <li><strong>Express Integration:</strong> Embeds the backend server within the Electron application</li>
+                    <li><strong>File System Management:</strong> Handles database directory creation and file operations</li>
+                    <li><strong>IPC Handlers:</strong> Implements import/export functionality for collections</li>
+                    <li><strong>Comprehensive Logging:</strong> Detailed electron-log implementation for debugging</li>
+                </ul>
+            </div>
+        
+            <div class="section">
+                <h4>Application Flow</h4>
+                <ul>
+                    <li><strong>Server Initialization:</strong> Starts Express server on port 3456 (configurable)</li>
+                    <li><strong>Window Creation:</strong> Launches main application window after server is ready</li>
+                    <li><strong>API Routes:</strong> Configures backend endpoints for collections and categories</li>
+                    <li><strong>Static Content:</strong> Serves React frontend from the build directory</li>
+                    <li><strong>Application Lifecycle:</strong> Manages window creation, closing, and activation events</li>
+                </ul>
+            </div>
+        
+            <div class="section">
+                <h4>IPC Handlers</h4>
+                <ul>
+                    <li><strong>export-collection:</strong> Saves collection data to JSON file</li>
+                    <li><strong>import-collection:</strong> Loads collection data from JSON file</li>
+                </ul>
+            </div>
+        
+            <div class="section">
+                <h4>Dependencies</h4>
+                <ul>
+                    <li>electron - Desktop application framework</li>
+                    <li>express - Web server framework</li>
+                    <li>electron-log - Enhanced logging system</li>
+                    <li>dotenv - Environment configuration</li>
+                    <li>fs/path - File system operations</li>
+                </ul>
+            </div>
+        </div>
+        
+<!-- main package.json Documentation -->
+<div id="main-package" class="tab-content">
+    <h3>package.json (Main)</h3>
+    
+    <div class="section">
+        <h4>Description</h4>
+        <p>Root configuration file for the CollectTracker Electron application that manages dependencies, scripts, and build settings for the entire project.</p>
+    </div>
+
+    <div class="section">
+        <a href="https://github.com/YourUsername/CollectTracker/blob/main/package.json"
+           class="github-link" target="_blank">
+           View Code on GitHub
+        </a>
+    </div>
+
+    <div class="section">
+        <h4>Application Metadata</h4>
+        <ul>
+            <li><strong>Name:</strong> collecttracker</li>
+            <li><strong>Version:</strong> 1.0.0</li>
+            <li><strong>Description:</strong> Collection tracking desktop application</li>
+            <li><strong>Main:</strong> main.js</li>
+            <li><strong>Author:</strong> Andrew</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Scripts</h4>
+        <ul>
+            <li><strong>start:</strong> Launch Electron application</li>
+            <li><strong>dev:</strong> Run client, server, and Electron concurrently for development</li>
+            <li><strong>build:</strong> Create production build of React client</li>
+            <li><strong>package:</strong> Build Windows executable with electron-builder</li>
+            <li><strong>postinstall:</strong> Install dependencies for client and server</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Dependencies</h4>
+        <ul>
+            <li><strong>concurrently:</strong> Run multiple commands simultaneously</li>
+            <li><strong>electron-log:</strong> Enhanced logging for Electron</li>
+            <li><strong>express:</strong> Web server framework</li>
+            <li><strong>sqlite3:</strong> SQLite database driver</li>
+            <li><strong>multer:</strong> File upload handling</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>Build Configuration</h4>
+        <ul>
+            <li><strong>appId:</strong> com.collecttracker.app</li>
+            <li><strong>productName:</strong> CollectTracker</li>
+            <li><strong>Target:</strong> Windows NSIS installer</li>
+            <li><strong>Resources:</strong> Client build, server files, and database</li>
+            <li><strong>ASAR Packaging:</strong> Enabled for production builds</li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<!-- Future tabs here -->
+    </div>
+</section>
+
+
+
+
+
+
+<!-- Screenshots Section -->
+<section id="screenshots">
+    <h2>Application Screenshots</h2>
+    <p>Creating a collection, creating an item within a collection, and then assigning an item to a category!</p>
+    
+    <div class="simple-slideshow">
+        <div class="slideshow-container">
+            <div class="slideshow-slide active">
+                <img src="images/screenshot-1.png" alt="Screenshot 1">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-2.png" alt="Screenshot 2">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-3.png" alt="Screenshot 3">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-4.png" alt="Screenshot 4">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-5.png" alt="Screenshot 5">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-6.png" alt="Screenshot 6">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-7.png" alt="Screenshot 7">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-8.png" alt="Screenshot 8">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-9.png" alt="Screenshot 9">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-10.png" alt="Screenshot 10">
+            </div>
+            
+            <div class="slideshow-slide">
+                <img src="images/screenshot-11.png" alt="Screenshot 11">
+            </div>
+        </div>
+        
+        <div class="slideshow-controls">
+            <button class="slideshow-button prev" onclick="changeSlide(-1)">Previous</button>
+            <span id="slide-counter">1 / 11</span>
+            <button class="slideshow-button next" onclick="changeSlide(1)">Next</button>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+    <script src="documentation.js"></script>
+</body>
+</html>

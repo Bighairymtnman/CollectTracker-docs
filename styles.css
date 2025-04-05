@@ -1,0 +1,379 @@
+:root {
+    --primary-color: #f4f4f4;
+    --secondary-color: #ff5733;
+    --background-color: #2a2a2a;
+    --card-background: #333333;
+    --code-background: #222222;
+    --border-color: rgba(255, 87, 51, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--primary-color);
+    background-color: var(--background-color);
+}
+
+/* Header & Navigation */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: rgba(42, 42, 42, 0.95);
+    border-bottom: 2px solid var(--border-color);
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem;
+}
+
+nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+    background: rgba(255, 87, 51, 0.1);
+}
+
+/* Content Layout */
+.content {
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding: 2rem;
+}
+
+/* Section Styling */
+section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--card-background);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+h1, h2 {
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Tab System */
+.tab-container {
+    margin-top: 2rem;
+}
+
+.tab-list {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.tab-button {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    color: var(--secondary-color);
+    background: rgba(255, 87, 51, 0.1);
+}
+
+.tab-button.active {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+/* Component List */
+.component-list {
+    width: 150px;
+    border-right: 1px solid var(--border-color);
+    padding-right: 1rem;
+}
+
+.component-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem;
+    margin: 0.2rem 0;
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.component-button:hover {
+    color: var(--secondary-color);
+    background: rgba(255, 87, 51, 0.1);
+}
+
+.component-button.active {
+    background: var(--secondary-color);
+    color: white;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 1rem;
+    background: var(--card-background);
+    border-radius: 0 0 4px 4px;
+}
+
+.tab-content#components {
+    display: none;
+}
+
+.tab-content#components.active {
+    display: flex;
+    gap: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Component Content */
+.component-content {
+    flex: 1;
+    padding: 2rem;
+    display: none;
+}
+
+.component-content.active {
+    display: block;
+}
+
+/* Code Blocks */
+pre {
+    background: var(--code-background);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    margin: 1rem 0;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+    color: var(--primary-color);
+}
+
+/* Tech Stack Tags */
+.tech-stack {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.tech-tag {
+    background: rgba(255, 87, 51, 0.1);
+    color: var(--secondary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid var(--secondary-color);
+}
+
+/* Development Steps Section */
+#devsteps {
+    width: 100%;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+#devsteps .tab-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Component Documentation Styling */
+.component-content h3 {
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.component-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: var(--card-background);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.component-section h4 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.github-link {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.github-link:hover {
+    background: #ff6b4a;
+    transform: translateY(-2px);
+}
+
+.component-section ul {
+    list-style: none;
+}
+
+.component-section ul li {
+    margin: 0.8rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--secondary-color);
+}
+
+.component-section strong {
+    color: var(--secondary-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Core file content styling */
+.tab-content .section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: var(--card-background);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.tab-content h3 {
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab-content .section h4 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.tab-content .section ul {
+    list-style: none;
+}
+
+.tab-content .section ul li {
+    margin: 0.8rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--secondary-color);
+}
+
+.tab-content .section strong {
+    color: var(--secondary-color);
+}
+
+
+
+
+
+
+/* Simple Slideshow Styling */
+.simple-slideshow {
+    max-width: 90%;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.slideshow-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    background: #f8f9fa;
+    min-height: 500px; /* Set a minimum height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshow-slide {
+    display: none;
+    width: 100%;
+    padding: 15px;
+}
+
+.slideshow-slide.active {
+    display: block;
+}
+
+.slideshow-slide img {
+    width: 100%;
+    max-height: 70vh; /* Use viewport height to ensure it's large but still fits on screen */
+    object-fit: contain; /* Maintain aspect ratio */
+    display: block;
+    border-radius: 4px;
+    margin: 0 auto; /* Center the image */
+}
+
+.slideshow-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 1.5rem;
+}
+
+.slideshow-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.slideshow-button:hover {
+    background: #0056b3;
+}
+
+#slide-counter {
+    font-size: 1rem;
+    color: #6c757d;
+    font-weight: bold;
+}
